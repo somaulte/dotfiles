@@ -1,0 +1,8 @@
+double_buffer yes
+out_to_console yes
+update_interval 0.1
+out_to_x no
+
+TEXT
+ ${exec /home/somaulte/.xmonad/scripts/bar_vol.sh}      \
+^ca(1,~/.xmonad/scripts/dzen_music.sh)${exec /home/somaulte/.xmonad/scripts/music.sh}^ca()\

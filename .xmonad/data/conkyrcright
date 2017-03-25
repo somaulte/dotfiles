@@ -1,0 +1,12 @@
+double_buffer yes
+out_to_console yes
+update_interval 1.0
+out_to_x no
+
+TEXT
+^ca(1,~/.xmonad/scripts/dzen_updateindicator.sh)${texeci 1800 ~/.xmonad/scripts/updatecheck.sh}${texeci 5 ~/.xmonad/scripts/updateindicator.sh}^ca()      \
+^i($HOME/.xmonad/dzen2/temp.xbm) ${i8k_cpu_temp}°C      \
+${execi 2 $HOME/.xmonad/scripts/bar_wifi.sh} ${wireless_essid wlp1s0}      \
+${execi 2 $HOME/.xmonad/scripts/bar_battery.sh}      \
+^i($HOME/.xmonad/dzen2/calendar.xbm) ${time %A, %B %e, %Y}      \
+^i($HOME/.xmonad/dzen2/clock.xbm) ${time %l:%M %p} \
