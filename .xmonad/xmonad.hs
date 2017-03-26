@@ -16,9 +16,6 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.UrgencyHook
 import XMonad.Hooks.SetWMName
 
-import XMonad.Actions.WorkspaceNames
-
-
 import XMonad.Util.EZConfig
 import XMonad.Util.Run
 import qualified XMonad.StackSet as W
@@ -216,15 +213,15 @@ newKeys conf@(XConfig {XMonad.modMask = modm}) =
    -- Volume lower
    , ((0,                      0x1008FF11), spawn (myScriptsPath ++ "vol.sh volume -5%"))
    -- Play/pause music
-   , ((0,                      0x1008FF14), spawn (myScriptsPath ++ "cmu.sh -u"))
+   , ((0,                      0x1008FF14), spawn (myScriptsPath ++ "cmus-remote -u"))
    -- Next song
-   , ((0,                      0x1008FF17), spawn (myScriptsPath ++ "cmu.sh -n"))
+   , ((0,                      0x1008FF17), spawn (myScriptsPath ++ "cmus-remote -n"))
    -- Previous song
-   , ((0,                      0x1008FF16), spawn (myScriptsPath ++ "cmu.sh -r"))
+   , ((0,                      0x1008FF16), spawn (myScriptsPath ++ "cmus-remote -r"))
    -- Raise music volume
-   , ((shiftMask,              0x1008FF13), spawn (myScriptsPath ++ "cmu.sh -v +5%"))
+   , ((shiftMask,              0x1008FF13), spawn (myScriptsPath ++ "cmus-remote -v +5%"))
    -- Lower music volume
-   , ((shiftMask,              0x1008FF11), spawn (myScriptsPath ++ "cmu.sh -v -5%"))
+   , ((shiftMask,              0x1008FF11), spawn (myScriptsPath ++ "cmus-remote -v -5%"))
    -- Raise brightness
    , ((0,                      0x1008FF02), spawn (myScriptsPath ++ "bri.sh inc"))
    -- Lower Brightness

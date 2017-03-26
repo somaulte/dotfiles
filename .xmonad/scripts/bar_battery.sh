@@ -1,8 +1,8 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 source $(dirname $0)/config.sh
 
-BAT=$(head -n 1 /sys/class/power_supply/BAT*/capacity)
+BAT=$(< /sys/class/power_supply/BAT*/capacity)
 	if [[ $BAT -gt 100 ]]; then
 		BAT=100
 	fi

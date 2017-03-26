@@ -1,10 +1,15 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 source $(dirname $0)/config.sh
 
-vol_lvl=$(pactl list sinks | grep '^[[:space:]]Volume:' | \
-    head -n $(( $SINK + 1 )) | tail -n 1 | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,')
-vol_stat=$(pacmd list-sinks | grep mute | sed 's/.*: //')
+vol_lvl=$(pactl list sinks | grep '^[[:space:]]Volume:')
+vol_lvl=${vol_lvl/\%*}
+vol_lvl=${vol_lvl//*\/}
+vol_lvl=${vol_lvl//[[:space:]]}
+vol_lvl=${vol_lvl/\%*}
+
+vol_stat=$(pacmd list-sinks | grep muted)
+vol_stat=${vol_stat/*:[[:space:]]}
 
 if [ $vol_lvl -lt 1 ] || [ $vol_stat == "yes" ]; then
     ICON="volume0.xbm"

@@ -1,6 +1,8 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-dev=$(xinput list | grep Raydium | sed -n -e 's/^.*id=//p' | cut -c1-2)
-
+dev=$(xinput list | grep Raydium)
+dev=${dev/*id=}
+dev=${dev/\[*}
+dev=${dev//[[:space:]]}
 
 xinput disable $dev
