@@ -27,9 +27,9 @@ art="$HOME/Pictures/.albumart/$artist/$album.png"
 if [ $(pgrep dzen_music.sh | wc -w) -le 4 ]; then
    (echo "";
       echo "^i(.xmonad/dzen2/music.xbm)";
-      echo " $track";
-      echo " $artist";
-      echo " $album";
+      echo "$track";
+      echo "$artist";
+      echo "$album";
       echo "";
       echo "^ca(1, cmus-remote -r) ^i(.xmonad/dzen2/prev.xbm) ^ca()      ^ca(1, cmus-remote -u) ^i(.xmonad/dzen2/pause.xbm) ^ca()      ^ca(1, cmus-remote -u) ^i(.xmonad/dzen2/play.xbm) ^ca()      ^ca(1, cmus-remote -n) ^i(.xmonad/dzen2/next.xbm) ^ca()";
       sleep 5.2)\
@@ -47,10 +47,10 @@ if [ $(pgrep dzen_music.sh | wc -w) -le 4 ]; then
       perc=$((100 * $position / $duration))
       percbar=$(echo -e "$perc" | gdbar -bg $bar_bg -fg $foreground -h 1 -w $WIDTH)
 
-         (echo "";
-      echo $percbar;
-      sleep 1);
-   done\
+      (echo "";
+          echo $percbar;
+          sleep 1);
+done\
    | dzen2 -sa l -ta c -fg $foreground -bg $background -h $HEIGHT -x $XPOS -y $(( $YPOS + 140 )) -w $WIDTH -l $LINES2 -fn 'Open Sans:Regular:size=9' -e 'onstart=uncollapse;button3=exit' &
    feh -x -B black -g +$(($WIDTH))+$(($YPOS)) "$art" &
    sleep 5.2;
