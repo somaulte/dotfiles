@@ -12,8 +12,6 @@ import
 import 
    XMonad.Layout.Simplest
 import 
-   XMonad.Layout.Grid
-import 
    XMonad.Layout.ResizableTile
 import 
    XMonad.Layout.Tabbed
@@ -154,19 +152,19 @@ main
                ++ myBgColor
                ++ "' -fn '"
                ++ myFont
-               ++ "' -h '20' -e 'button2=;'"
+               ++ "' -y -1080 -h '18' -e 'button2=;'"
 
             -- Status Bar
             myStatusBar
-               = "dzen2 -x 738 -w 444 -ta r "
+               = "dzen2 -x 730 -w 460 -ta l "
                ++ myDzenOptions
       
             -- Conky Bars
             myConkyBarRight
-               = "conky -c ~/.xmonad/data/conkyrcright | dzen2 -x 1182 -w 738 -ta r "
+               = "conky -c ~/.xmonad/data/conkyrcright | dzen2 -x 1190 -w 730 -ta r "
                ++ myDzenOptions
             myConkyBarLeft
-               = "conky -c ~/.xmonad/data/conkyrcleft | dzen2 -x 0 -w 738 -ta l "
+               = "conky -c ~/.xmonad/data/conkyrcleft | dzen2 -x 0 -w 730 -ta l "
                ++ myDzenOptions
       
             ---
@@ -194,12 +192,11 @@ main
                $ boringWindows
                $ noBorders
                $ gaps
-                  [(U, 20)]
+                  [(U, 18)]
                $ subLayout
                   [] (Simplest)
                   $ halfNHalf
                   ||| Mirror halfNHalf
-                  ||| Grid
                where
                   halfNHalf
                      = ResizableTall master delta ratio []
@@ -252,27 +249,15 @@ main
             ---
             myWorkspaces
                = clickable $
-                  [ "        ^i("
-                  ++ myBitmapsPath
-                  ++ "/1.xbm)        "
-                  , "        ^i("
-                  ++ myBitmapsPath
-                  ++ "/2.xbm)        "
-                  , "        ^i("
-                  ++ myBitmapsPath
-                  ++ "/3.xbm)        "
-                  , "        ^i("
-                  ++ myBitmapsPath
-                  ++ "/4.xbm)        "
-                  , "        ^i("
-                  ++ myBitmapsPath
-                  ++ "/5.xbm)        "
-                  , "        ^i("
-                  ++ myBitmapsPath
-                  ++ "/6.xbm)        "
-                  , "        ^i("
-                  ++ myBitmapsPath
-                  ++ "/7.xbm)        "
+                  [ "      "
+                  , "      "
+                  , "      "
+                  , "      "
+                  , "      "
+                  , "      "
+                  , "      "
+                  , "      "
+                  , "      "
                   ]
                where 
                   clickable
@@ -281,7 +266,6 @@ main
                         ++ show (n)
                         ++ ")"
                         ++ ws
-                        ++ "^ca()"
                         | (i,ws)
                         <- zip [1..] l
                         , let n = i
@@ -595,30 +579,24 @@ main
                   , ppWsSep
                      = ""
                   , ppCurrent
-                     = wrapBg myCurrentWsBgColor
-                  , ppVisible
-                     = wrapFgBg myVisibleWsFgColor myVisibleWsBgColor
+                     = wrapA
+                  , ppHidden
+                     = wrapFgHA
                   , ppHiddenNoWindows
-                     = wrapFg myHiddenEmptyWsFgColor
+                     = wrapIA
                   , ppUrgent
-                     = wrapFg myUrgentWsFgColor
+                     = wrapU
                   , ppTitle
                      = const ""
                   , ppLayout
                      = const ""
                   }
                where
-                  wrapFgBg fgColor bgColor content
-                     = wrap ("^fg("
-                     ++ fgColor
-                     ++ ")^bg("
-                     ++ bgColor
-                     ++ ")") "^fg()^bg()" content
-                  wrapFg color content
-                     = wrap ("^fg("
-                     ++ color
-                     ++ ")") "^fg()" content
-                  wrapBg color content
-                     = wrap ("^bg("
-                     ++ color
-                     ++ ")") "^bg()" content
+                  wrapA content
+                     = wrap ("") "^i(.xmonad/dzen2/A.xbm)      ^ca()" content
+                  wrapFgHA content
+                     = wrap ("^fg(#ffffff)^bg(#212121)") "^i(.xmonad/dzen2/HA.xbm)      ^fg()^bg()^ca()" content
+                  wrapIA content
+                     = wrap ("^fg(#818181)") "^i(.xmonad/dzen2/IA.xbm)      ^fg()^ca()" content
+                  wrapU content
+                     = wrap ("^fg(#2465a4)") "^i(.xmonad/dzen2/A.xbm)      ^fg()^ca()" content
