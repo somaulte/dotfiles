@@ -1,7 +1,6 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-lite=$(xbacklight -get)
-lite=${lite/.*}
+lite=$(xbacklight -get | awk '{ print int($1 + 0.5) }')
 
 if [[ lite -le 10 ]] && [[ $1 == dec ]]; then
     xbacklight -set 1

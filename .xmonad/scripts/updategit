@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+urxvtc -e bash -c '
+echo Updating system packages;
+pacaur -Syu --devel;
+echo Checking for orphans;
+pacaur -Rns $(pacaur -Qtdq);
+echo Finalizing...;
+~/.xmonad/scripts/updatecheck.sh;
+echo Finished, press enter to exit;
+read;'

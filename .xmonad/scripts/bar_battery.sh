@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 source $(dirname $0)/config.sh
 
@@ -35,5 +35,5 @@ else
 	ICON="battery90.xbm"
 fi
 
-ICON='^i(/home/somaulte/.xmonad/dzen2/'"$ICON)"
+ICON='^i(.xmonad/dzen2/'"$ICON)"
 echo "$color$ICON $BAT%^fg()"

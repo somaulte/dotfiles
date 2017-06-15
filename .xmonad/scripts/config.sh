@@ -4,7 +4,7 @@ background="#212121"
 foreground="#ffffff"
 highlight="#3465a4"
 
-YPOS="20"
+YPOS="16"
 HEIGHT="20"
 
 FONT='Open Sans:Regular:size=9'

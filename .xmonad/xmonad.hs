@@ -156,15 +156,15 @@ main
 
             -- Status Bar
             myStatusBar
-               = "dzen2 -x 730 -w 460 -ta l "
+               = "dzen2 -x 1050 -w 460 -ta l "
                ++ myDzenOptions
       
             -- Conky Bars
             myConkyBarRight
-               = "conky -c ~/.xmonad/data/conkyrcright | dzen2 -x 1190 -w 730 -ta r "
+               = "conky -c ~/.xmonad/data/conkyrcright | dzen2 -x 1510 -w 1050 -ta r "
                ++ myDzenOptions
             myConkyBarLeft
-               = "conky -c ~/.xmonad/data/conkyrcleft | dzen2 -x 0 -w 730 -ta l "
+               = "conky -c ~/.xmonad/data/conkyrcleft | dzen2 -x 0 -w 1050 -ta l "
                ++ myDzenOptions
       
             ---
@@ -210,7 +210,7 @@ main
             myTabTheme                    
                = def
                   { fontName
-                     = "xft:Open Sans:pixelsize=12"
+                     = "xft:Open Sans:pixelsize=11"
                   , activeColor
                      = myCurrentWsBgColor
                   , inactiveColor
@@ -242,7 +242,7 @@ main
                      "urxvtd"
                   spawn
                      (myScriptsPath
-                     ++ "dis_touchscreen.sh")
+                     ++ "wallpaper.sh start")
 
             ---
             -- Workspaces
@@ -355,7 +355,7 @@ main
                   , xK_Tab)
                      , sendMessage
                         NextLayout)
-                  -- Resize viewed windows to the correct size
+                  -- Reset the current workspace to default layout and window sizes
                   , ((modm
                   .|. mod1Mask
                   , xK_space)
@@ -370,7 +370,7 @@ main
                   , xK_Tab)
                         , onGroup
                         W.focusUp')
-                  -- Move focus to the next window
+                  -- Move focus to the previous window
                   , ((mod1Mask
                   .|. shiftMask
                   , xK_Tab)
@@ -380,12 +380,6 @@ main
                   , xK_Tab)
                      , onGroup
                      W.focusDown')
-                  -- Swap the focused window and the master window
-                  , ((modm
-                  .|. mod1Mask
-                  , xK_Return)
-                     , windows
-                     W.swapMaster)
                   -- Swap the focused window with the next window
                   , ((modm
                   .|. shiftMask
@@ -471,7 +465,7 @@ main
                   .|. shiftMask
                   , xK_q)
                      , spawn
-                        "killall conky dzen2; xmonad --recompile; xmonad --restart")
+                        "killall conky dzen2 xwinwrap; xmonad --recompile; xmonad --restart")
                   ]
                   ++
                
@@ -543,6 +537,10 @@ main
                   , xK_Print)
                      , spawn 
                         "gnome-screenshot")
+                  , ((modm
+                  , xK_Print)
+                     , spawn
+                        "gnome-screenshot -a")
                   ]
 
             ---
@@ -593,10 +591,10 @@ main
                   }
                where
                   wrapA content
-                     = wrap ("") "^i(.xmonad/dzen2/A.xbm)      ^ca()" content
+                     = wrap ("^fg(#fff)") "^i(.xmonad/dzen2/A.xbm)      ^fg()^ca()" content
                   wrapFgHA content
-                     = wrap ("^fg(#ffffff)^bg(#212121)") "^i(.xmonad/dzen2/HA.xbm)      ^fg()^bg()^ca()" content
+                     = wrap ("^fg(#414141)^bg(#212121)") "^i(.xmonad/dzen2/A.xbm)      ^fg()^bg()^ca()" content
                   wrapIA content
-                     = wrap ("^fg(#818181)") "^i(.xmonad/dzen2/IA.xbm)      ^fg()^ca()" content
+                     = wrap ("^fg(#414141)") "^i(.xmonad/dzen2/IA.xbm)      ^fg()^ca()" content
                   wrapU content
                      = wrap ("^fg(#2465a4)") "^i(.xmonad/dzen2/A.xbm)      ^fg()^ca()" content

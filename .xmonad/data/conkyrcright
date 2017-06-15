@@ -5,8 +5,8 @@ out_to_x no
 
 TEXT
 ^ca(1,~/.xmonad/scripts/dzen_updateindicator.sh)${texeci 1800 ~/.xmonad/scripts/updatecheck.sh}${texeci 5 ~/.xmonad/scripts/updateindicator.sh}^ca()      \
-^i($HOME/.xmonad/dzen2/temp.xbm) ${i8k_cpu_temp}°C      \
-${execi 2 $HOME/.xmonad/scripts/bar_wifi.sh} ${wireless_essid wlp1s0}      \
-${execi 2 $HOME/.xmonad/scripts/bar_battery.sh}      \
+^i($HOME/.xmonad/dzen2/temp.xbm) ${texeci 1 ~/.xmonad/scripts/cpu.sh}      \
+^i($HOME/.xmonad/dzen2/mem.xbm) ${memperc}%      \
+^i($HOME/.xmonad/dzen2/lan.xbm) ${addr enp30s0}      \
 ^i($HOME/.xmonad/dzen2/calendar.xbm) ${time %A, %B %e, %Y}      \
 ^i($HOME/.xmonad/dzen2/clock.xbm) ${time %l:%M %p} \

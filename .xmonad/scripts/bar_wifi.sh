@@ -1,15 +1,9 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 source $(dirname $0)/config.sh
 
-QUAL=$(iwconfig wlp1s0 | grep 'Link Quality=')
-QUAL=${QUAL/*y=}
-QUAL=${QUAL/\/*}
-
-MAX=$(iwconfig wlp1s0 | grep 'Link Quality=')
-MAX=${MAX/*\/}
-MAX=${MAX//[[:space:]]*}
-
+QUAL=$(iwconfig wlp1s0 | grep 'Link Quality=' | awk '{gsub(/[=/]/," "); print $3}')
+MAX=$(iwconfig wlp1s0 | grep 'Link Quality=' | awk '{gsub(/[=/]/," "); print $4}')
 PERC=$(( $(( $QUAL * 100)) / $MAX ))
 
 if [[ $PERC -lt 20 ]]; then

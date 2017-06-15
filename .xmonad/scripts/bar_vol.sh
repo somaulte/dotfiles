@@ -3,13 +3,13 @@
 source $(dirname $0)/config.sh
 
 vol_lvl=$(pactl list sinks | grep '^[[:space:]]Volume:')
-vol_lvl=${vol_lvl/\%*}
-vol_lvl=${vol_lvl//*\/}
-vol_lvl=${vol_lvl//[[:space:]]}
-vol_lvl=${vol_lvl/\%*}
-
+vol_lvl=${vol_lvl##*Volume:}
+vol_lvl=${vol_lvl%\%*}
+vol_lvl=${vol_lvl#*\/[[:space:]]}
+vol_lvl=${vol_lvl%\%*}
 vol_stat=$(pacmd list-sinks | grep muted)
-vol_stat=${vol_stat/*:[[:space:]]}
+vol_stat=${vol_stat##*muted}
+vol_stat=${vol_stat#*:[[:space:]]}
 
 if [ $vol_lvl -lt 1 ] || [ $vol_stat == "yes" ]; then
     ICON="volume0.xbm"

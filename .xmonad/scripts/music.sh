@@ -19,6 +19,10 @@ if [[ -z $artist ]]; then
     artist=$(echo -e "$remote" | grep "tag artist" | sed -n -e 's/^.*tag artist //p')
 fi
 
+if [[ $title == "♠" ]]; then
+    title="^i($HOME/.xmonad/dzen2/spade.xbm)"
+fi
+
 if [[ -z $artist ]]; then
     echo ""
 else

@@ -1,10 +1,15 @@
 #!/bin/bash
 
-pactl set-sink-$1 0 $2
+sink="alsa_output.pci-0000_22_00.3.analog-stereo"
 
-vol_lvl=$(pactl list sinks | grep '^[[:space:]]Volume:' | \
-    head -n $(( $SINK + 1 )) | tail -n 1 | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,')
+pactl set-sink-$1 $sink $2
+
+vol_lvl=$(pactl list sinks | grep '^[[:space:]]Volume:')
+vol_lvl=${vol_lvl##*Volume:}
+vol_lvl=${vol_lvl%\%*}
+vol_lvl=${vol_lvl#*\/[[:space:]]}
+vol_lvl=${vol_lvl%\%*}
 
 if [[ vol_lvl -gt 150 ]]; then
-      pactl set-sink-$1 0 150%
+      pactl set-sink-$1 $sink 150%
 fi
