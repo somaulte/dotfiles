@@ -87,6 +87,8 @@ main
                = newKeys
             , mouseBindings
                = myMouseBindings
+            , clickJustFocuses
+               = myClickJustFocuses
             , workspaces
                = myWorkspaces
             , borderWidth
@@ -101,6 +103,12 @@ main
             ---
             myTerminal
                = "urxvtc"
+
+            ---
+            -- Clicking settings
+            ---
+            myClickJustFocuses
+               = False
 
             ---
             -- Paths
